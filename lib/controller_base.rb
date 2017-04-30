@@ -20,6 +20,11 @@ class ControllerBase
 
   # Set the response status code and header
   def redirect_to(url)
+    raise "Double render error" if already_built_response?
+    @already_built_response = true
+    
+    @res.location = url
+    @res.status = 302
   end
 
   # Populate the response with content.
@@ -28,6 +33,7 @@ class ControllerBase
   def render_content(content, content_type)
     raise "Double render error" if already_built_response?
     @already_built_response = true
+
     @res['Content-Type'] = content_type
     @res.write(content)
   end
