@@ -4,7 +4,7 @@ require_relative '../lib/controller_base'
 class MyController < ControllerBase
   def go
     if @req.path == "/cats"
-      render_content("hello cats!", "text/html")
+      render_content("hello, gatitos!", "text/html")
     else
       redirect_to("/cats")
     end
